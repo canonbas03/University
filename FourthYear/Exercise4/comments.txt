@@ -1,0 +1,3 @@
+cani|Hello|3
+cani|gerr|3
+cani|aaa|1
