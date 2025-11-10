@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="bg">
+  <head>
+    <meta charset="UTF-8" />
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Списък със задачи</h1>
+
+    <form id="taskForm">
+      <b id="message"></b>
+      <input type="text" id="title" placeholder="Въведи задача..." required />
+      <select id="priority">
+        <option value="0" selected>Ниска</option>
+        <option value="1">Средна</option>
+        <option value="2">Висока</option>
+      </select>
+      <input type="datetime-local" id="deadline" />
+      <button type="submit">Добави</button>
+    </form>
+
+    <table id="tasksTable">
+      <thead>
+        <tr>
+          <th>Задача</th>
+          <th>Приоритет</th>
+          <th>Краен срок</th>
+          <th>Статус</th>
+          <th>Действия</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+
+    <div id="updateModal" style="display: none">
+      <div class="modal-content">
+        <span class="close-modal" style="cursor: pointer">&times;</span>
+
+        <h2>Промени задача</h2>
+
+        <form id="updateForm" method="POST">
+          <input type="hidden" id="update-id" name="id" />
+
+          <label for="update-title">Име:</label>
+          <input type="text" id="update-title" name="title" required />
+
+          <label for="update-priority">Приоритет:</label>
+          <select id="update-priority" name="priority" required>
+            <option value="0">Нисък</option>
+            <option value="1">Среден</option>
+            <option value="2">Висок</option>
+          </select>
+
+          <label for="update-deadline">Краен срок:</label>
+          <input
+            type="datetime-local"
+            id="update-deadline"
+            name="deadline"
+            required
+          />
+
+          <button type="submit">Актуализирай</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
