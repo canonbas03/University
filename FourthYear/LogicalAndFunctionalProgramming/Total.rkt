@@ -1,0 +1,533 @@
+#lang scheme
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+; Podgotovka za kontrolna rabota
+; zad. 1
+
+(let ((x (/ 1 3)) (y (expt 3 2)))
+(+ (* x (expt y 2)) (* 3 (expt x 5)) (* 7 (expt y 2)))
+  )
+
+((lambda (x y)
+  (+ (* x (expt y 2)) (* 3 (expt x 5)) (* 7 (expt y 2))))
+  (/ 1 3)(expt 3 2))
+
+; zad. 2
+(let ((x (+ 2 5))(y (expt 2 3))) (+ (* x y)(* 2 x)(* 3 y)))
+
+((lambda (x y)
+   (+ (* x y)(* 2 x)(* 3 y)))
+ (+ 2 5) (expt 2 3)
+ )
+
+; zad. 3
+((lambda (x y)(sqrt (+ (expt x 2)(expt y 3)))) 5 6)
+
+(let ((x 5) (y 6))
+  (sqrt (+ (expt x 2)(expt y 3))))
+
+; zad. 4
+(define (inInterval num)
+(cond
+  ((and (> num 3) (< num 10)) 'Yes)
+  (else 'No)
+  ))
+
+; zad. 5
+(define (ap-product a b)
+(cond
+  ((> a b) 1)
+  (else (* a (ap-product (+ a 2) b)))
+  ))
+
+; zad. 6
+(define (zeroCount lst)
+(cond
+((null? lst)0)
+((= (car lst) 0) (+ 1 (zeroCount (cdr lst))))
+(else (zeroCount (cdr lst)))
+  ))
+
+; zad. 7
+(define (listOfEven lst)
+(cond
+((null? lst) '())
+((= (modulo (car lst) 2) 0) (cons (expt (car lst) 4) (listOfEven (cdr lst))))
+(else (listOfEven (cdr lst)))
+  ))
+
+; zad. 8
+(define (isTriangle a b c)
+(cond
+  ((or (<= a 0) (<= b 0) (<= c 0) (<= (+ a b) c) (<= (+ a c) b) (<= (+ b c) a)) 0)
+  ((= a b c) 3)
+  ((or (= a b) (= a c) (= b c)) 2)
+  (else 1)
+  ))
+
+(append '(1 2) '(3 4)) ; → (1 2 3 4)
+
+
+#| ; UPR. 7
+   ; zad. 1
+   (define (findOdds lst)
+   (cond
+    ((null? lst) '())
+    ((= (modulo (car lst) 2) 1) (cons (car lst) (findOdds ( cdr lst))))
+    (else (findOdds (cdr lst)))
+     ))
+   
+   ; zad. 2
+   (define (exptList lst)
+   (cond
+     ((null? lst) '())
+     (else (cons (expt (car lst) 2) (exptList(cdr lst))))
+     ))
+   
+   ; zad. 3
+   (define (multiplyByTwo lst)
+   (cond
+     ((null? lst) '())
+     (else (cons (* (car lst) 2) (multiplyByTwo (cdr lst))) )
+     ))
+   
+   ; zad. 4
+   (define (addUnique lst elem)
+   (cond
+     ((null? lst) (list elem))
+     ((= (car lst) elem) lst)
+     (else (cons (car lst) (addUnique (cdr lst) elem)))
+     ))
+   
+   ; zad. 5
+   (define (compareList lst1 lst2)
+   (cond
+     ((and (null? lst1) (null? lst2)) #t)
+     ((or (and (null? lst1) (not (null? lst2)))
+          (and (not (null? lst1)) (null? lst2))) #f)
+     ((not (= (car lst1) (car lst2))) #f)
+     (else (compareList (cdr lst1) (cdr lst2)))
+     ))
+   
+   ; zad. 6
+   (define (signChanges lst)
+   (cond
+     ((or (null? lst) (= (length lst) 1)) 0)
+     ((< (* (car lst) (cadr lst)) 0) (+ 1 (signChanges (cdr lst))))
+     (else (signChanges (cdr lst)))
+     ))
+   
+   ; zad. 7
+   (define (positiveNeg lst)
+   (cond
+     ((or (null? lst) (= (length lst) 1)) 0)
+     ((and (> (car lst) 0) (< (cadr lst) 0)) (+ 1 (positiveNeg (cdr lst))))
+     (else (positiveNeg(cdr lst)))
+     ))
+   
+   ; zad. 8
+   (define (evenToThird lst)
+   (cond
+     ((null? lst) '())
+     ((= (modulo (car lst) 2) 0) (cons (expt (car lst) 3) (evenToThird (cdr lst))))
+     (else (evenToThird (cdr lst)))
+     )
+     )
+   
+   ; zad. 9
+   (let ((x (+ 2 5)) (y (expt 2 3))) (+ (* x y) (* 2 x) (* 3 y)))
+   
+   ((lambda (x y)
+   (+ (* x y) (* 2 x) (* 3 y)))
+     (+ 2 5) (expt 2 3))
+   
+   ; zad. 10
+   ((lambda (x y) (sqrt (+ (expt x 2) (expt y 3)))) 5 6)
+   
+   (let ((x 5) (y 6))
+   (sqrt (+ (expt x 2) (expt y 3)))
+     )
+   
+   ; zad. 11
+   (define (makeTriangle a b c)
+     (cond
+       ((or (<= a 0) (<= b 0) (<= c 0) (<= (+ a b) c) (<= (+ a c) b) (<= (+ b c) a)) 0)
+       ((= a b c) 3)
+       ((or (= a b) (= b c) (= a c)) 2)
+       (else 1)
+   )) |#
+
+;==============================================
+#| ; UPR. 6
+   ; zad. 1
+   (caddr '(1 2 3 4 5))
+   
+   ; zad. 2
+   (define z '(1 (2 3) 4))
+   (caadr z)
+   
+   ; zad. 3
+   (reverse '(2 4 6 8))
+   
+   (define (reverseList lst)
+   (cond
+   ((null? lst) '())
+   (else (append (reverseList (cdr lst)) (list(car lst))))
+     )
+     )
+   
+   ; zad. 4
+   (length '(1 2 4 5))
+   
+   ; zad. 5
+   (define (getLength lst)
+   (cond
+   ((null? lst) 0)
+   (else (+ 1 (getLength(cdr lst))))
+     )
+     )
+   
+   ; zad. 6
+   (define (zeroCount lst)
+   (cond
+     ((null? lst) 0)
+     ((= (car lst) 0)(+ 1 (zeroCount (cdr lst))))
+     (else (zeroCount (cdr lst)))
+     ))
+   
+   ; zad. 7
+   (define (multiplyList lst)
+   (cond
+   ((null? lst) 1)
+   (else (* (car lst) (multiplyList (cdr lst))))
+     ))
+   
+   ; zad. 8
+   (append '(1 2) '(4 5))
+   (define (listAppend lst1 lst2)
+   (cond
+   ((null? lst1) lst2)
+   (else (cons (car lst1) (listAppend (cdr lst1) lst2)))
+     )
+     )
+   
+   (define (append1 x y)
+     (if (null? x) y
+         (cons (car x)(append (cdr x) y))))
+   
+   (append '(1 2) '(3 4))
+   
+   ; zad. 11
+   (define (makeTriangle a b c)
+     (cond
+       ((or (<= (+ a b) c) (<= (+ a c) b) (<= (+ b c) a)) 0)
+       ((= a b c) 3)
+       ((or (= a b) (= b c) (= a c)) 2)
+       (else 1)
+      ))
+ |#
+;===================================================
+#| ; UPR. 5
+   ; zad. 1
+   (define (factoriel x)
+   (cond
+   ((= x 1)1)
+   (else (* x (factoriel (- x 1))))
+     )
+     )
+   
+   ; zad. 2
+   (define (countNum x)
+   (cond
+   ((= (quotient x 10) 0)1)
+   (else (+ 1 (countNum (quotient x 10))))
+     )
+     )
+   
+   ; zad. 3
+   (define (hasSeven num)
+   (cond
+   ((= num 0) "Not found 7")
+   ((= (remainder num 10) 7) "Found 7")
+   (else (hasSeven(quotient num 10)))
+     )
+     )
+   
+   ;zad. 4
+   (define (progression n)
+   (cond
+   ((= n 1) 1)
+    ((= (remainder n 3) 1) (* n (progression(- n 3))))
+   (else (progression(- n 1)))
+    )
+     )
+   
+   ; zad. 5
+   '(1 3 5 8)
+   '((7 8) 2 3)
+   (list (list 7 8) 2 3)
+   
+   ; zad. 6
+   (car '(1 2 3 4))
+   
+   ; zad. 7
+   (cdr '(1 2 3 4))
+   
+   ; zad. 8
+   (cadr '(1 2 3 4))
+   
+   ; zad. 9
+   (define (sumList lst)
+   (cond
+   ((null? lst) 0)
+   (else (+ (car lst) (sumList (cdr lst))))
+     )
+  ) |#
+
+;=============================================================
+#| ; UPR. 4
+   ; zad. 1
+   (let ((a 5) (b 3)) (* a b))
+   
+   ; zad. 2
+   ((lambda (a b) (+ (expt a 3) (expt b 4)))1 2)
+   
+   ; zad. 3
+   (let ((a 1) (b 2)) (+ (expt a 3) (expt b 4)))
+   
+   ; zad. 4
+   (let ((a (- 16 2))(b (* 4 2.25)))(expt a b))
+   ((lambda (a b)(expt a b))(- 16 2) (* 4 2.25))
+   
+   ; zad. 5
+   ((lambda (x y z)(* x y z)) 2 3 4)
+   (let ((x 2) (y 3) (z 4)) (* x y z))
+   
+   ; zad. 6
+   (define (zad6 x y)
+   (let ((a (+ x 2)) (b (- y 1)))
+     (+ (* (expt a 2) y) (* b x) (* a b x y))
+     ))
+   
+   ; zad. 7
+   (define (zad7 a b c)
+   (let ((p (/ (+ a b c) 2)))
+     (sqrt(* p (+ p a ) (+ p b) (+ p c))))
+     )
+   
+   ; zad. 8
+(let* ((x 2) (y (+ x 5))) (+ x y)) |#
+
+;=============================================================
+#| ; UPR. 3
+   ; zad. 1
+   (define (findX x)
+   (cond
+     ((> x 5) (- (* 10 x) (+ (* 5 x) 5)))
+   (else (- 100 (* 20 x) (* 15 x)))
+      ))
+   
+   ; zad. 2
+   (define (inRange x)
+   (cond
+   ((and (>= x 5) (<= x 10)) 'Yes)
+   (else 'No)))
+   
+   ; zad. 3
+   (define (koreni a b c)
+   (define D (- (* b b) (* 4 a c)))
+     (cond
+   ((> D 0) '2_korena)
+   ((= D 0) '1_koren)
+   (else '0)
+   ))
+   
+   ; zad. 4
+   (define (xIn x)
+   (cond
+   ((or (and (> x 1) (< x 6)) (and (> x 16) (< x 21))) 'Yes)
+   (else 'No)
+     )
+     )
+   
+   ; zad. 5
+   (define (findX2 x)
+   (cond
+   ((> x 2) (- (* x x) (+ x 4)))
+   ((and (<= 1 x) (<= x 2)) (/ 1 x))
+   (else 0)))
+   
+   ; zad. 6
+   (define (zad6 a b)
+   (cond
+   ((= a b) a)
+   ((< a b) (* 2 a))
+   (else (* 2 b))))
+   
+   ; zad. 7
+   (define (talk str)
+     (cond
+   ((string=? str "Hi") "Hi, how are you")
+   ((string=? str "How are you?") "Fine, thank you!")
+   (else "I’m waiting!")
+    )) |#
+;===========================================================
+
+#| ; UPR. 2
+   ; zad. 1
+   (define (sqr-root x)(* x x))
+   
+   ; zad. 2
+   (define (a x)
+     (+ (- (* 5 (expt x 2)) (* 2 x)) 10))
+   (define (b p)
+   (sqrt (* p (+ 10 p) (+ 20 p) (+ 30 p))))
+   
+   (define (g y)
+   (/ (+ (sqrt(+ (* y y) y)) (* 5 y) 100) (* 2 y)))
+   
+   
+   ; zad. 3
+   (define (razlika a b)
+   (- (* a a) (* b b)))
+   
+   ; zad. 4
+   (define (liceKrig pi r)
+   (* pi (* r r)))
+   
+   ; zad. 5
+   (define (twoCircles pi r)
+   (+ (* pi (* r r)) (* pi (expt (+ 10 r) 2))))
+   
+   ; zad. 6
+   (define (discr a b c)
+   (- (* b b) (* 4 a c))
+     )
+   
+   ; zad. 7
+   (define (CtoF c)
+   (+ (* c 1.8) 32))
+   
+   ; zad. 8
+   (define (Prihod n)(* 5 n))
+   (define (Razhod n)(+ 20 (* n 0.5)))
+   (define (Pechalba n)(- (Prihod n)(Razhod n)))
+   
+   ; zad. 9
+   ((lambda (x y)(+ (* x x) (- (* 10 y) 20)))5 3)
+   
+   ; zad. 10
+   ((lambda (a b)(* (expt a 2) (expt b 3)))1 2)
+   
+   ; zad. 11
+   ((lambda (x y)
+     (* (* x (+ 1 (/ 8 100))) (+ 1 (/ y 100))))20 10)
+ |#
+
+;================================================================
+#| #lang scheme
+   ; UPR. 1
+   ; zad. 1
+   (- (* 0.4 (- 41 (/ 22 3))) 19.5)
+   (/ (+ (/ 5 3) (/ 10 2)) (- (/ 5 8) (/ 10 7)))
+   (/ (+ (expt 5 2) (expt 8 3)) (* 2.5 5))
+   
+   ; zad. 2
+   (positive? (/ (- 120 50) 3))
+   (negative? (/ (- 120 50) 3))
+   
+   ; zad. 3
+   (odd? (/ 25 0.2))
+   (even? (/ 25 0.2))
+   
+   ; zad. 4
+   (make-string 3 #\A)
+   
+   ; zad. 5
+   "This is"
+   
+   ; zad. 6
+   '(1 3 5 7 9)
+   (list 1 2 3)
+   (list '1 '2 '3)
+   
+   ; zad. 7
+   #(3 5 8)
+   
+   ; zad. 8
+   (string-ref "Windows 10" 2)
+   
+   ; zad. 9
+   (string-length "Windows 10")
+   
+   ; zad. 10
+   (string-append "Hello " "world!")
+   
+   ; zad. 11
+   (string->list "Yes!")
+   
+   ; zad. 12
+   (define Pi 3.14)
+   (define r 11)
+   
+   ; zad. 13
+   (define (S Pi r) (* Pi (expt r 2)))
+   (S Pi r)
+   
+   ; zad. 14
+   (S Pi 5)
+   
+   ; zad. 15
+   (define sym #\s)
+   (define str "Hello")
+   (define sp '(4 8 3))
+   
+   ; zad. 16
+   (define ref (string-ref "Windows 10" 2))
+(define len (string-length "Windows 10")) |#
