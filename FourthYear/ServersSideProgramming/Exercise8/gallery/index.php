@@ -60,7 +60,7 @@ if (!isset($_SESSION["user_id"])) {
     </div>
 
     <!-- Галерия -->
-    <div id="gallery" class="gallery-container"></div>
+    <div id="gallery" class="gallery-containers"></div>
 
   </div>
 
