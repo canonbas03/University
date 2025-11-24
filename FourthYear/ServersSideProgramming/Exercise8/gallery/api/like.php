@@ -30,7 +30,7 @@ if ($stmt->num_rows > 0) {
     $liked = true;
 }
 
-// Get updated total likes
+// Get total likes
 $count = $conn->prepare("SELECT COUNT(*) as c FROM likes WHERE photo_id=?");
 $count->bind_param("i", $photoId);
 $count->execute();

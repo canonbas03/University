@@ -16,7 +16,7 @@ if ($photoId <= 0) {
     exit;
 }
 
-// Check ownership
+// Check owner
 $stmt = $conn->prepare("SELECT user_id FROM photos WHERE id=?");
 $stmt->bind_param("i", $photoId);
 $stmt->execute();

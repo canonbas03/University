@@ -15,7 +15,7 @@ if ($photoId <= 0) {
     exit;
 }
 
-// Check ownership
+// Check owner
 $stmt = $conn->prepare("SELECT user_id FROM photos WHERE id=?");
 $stmt->bind_param("i", $photoId);
 $stmt->execute();
@@ -32,7 +32,7 @@ if ($ownerId != $userId) {
     exit;
 }
 
-// Delete the photo file from server
+// Delete the photo
 $stmt = $conn->prepare("SELECT filename FROM photos WHERE id=?");
 $stmt->bind_param("i", $photoId);
 $stmt->execute();
@@ -45,7 +45,6 @@ if (file_exists($filePath)) {
     unlink($filePath);
 }
 
-// Delete the photo from database (likes will cascade if foreign key ON DELETE CASCADE)
 $del = $conn->prepare("DELETE FROM photos WHERE id=?");
 $del->bind_param("i", $photoId);
 if ($del->execute()) {
