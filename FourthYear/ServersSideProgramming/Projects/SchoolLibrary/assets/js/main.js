@@ -4,7 +4,7 @@ $(document).ready(function() {
         $("#message").html(response).fadeIn(200).delay(3000).fadeOut(1000);
         $("#addBookForm")[0].reset();
         $("#borrowBookForm")[0].reset();
-        $("returnBorrowedForm")[0].reset();
+        $("#returnBorrowedForm")[0].reset();
     }
 
     $("#addBookForm").submit(function(e) {
@@ -23,8 +23,10 @@ $(document).ready(function() {
             data: formData,
             success: function(response) {
                 showMessage(response);
+                fetchBooks();
             }
         });
+        
     });
 
     $("#borrowBookForm").on("submit", function(e) {
@@ -41,10 +43,10 @@ $(document).ready(function() {
             data: formData,
             success: function(response){
                 showMessage(response);
+                fetchBooks();
             }
-
+            
         })
-
     });
 
     $("#returnBorrowedForm").on("submit", function(e){
@@ -61,10 +63,33 @@ $(document).ready(function() {
             data: formData,
             success: function(response){
                 showMessage(response);
+                fetchBooks();
             }
         })
+        
     });
 
+    fetchBooks();
+    function fetchBooks() {
+    $.ajax({
+        url: "api/fetch_books.php",
+        type: "GET",
+        success: function(response) {
+                $("#allBooksTable tbody").html(response);
+                 fetchBorrowedBooks();
+            }
+        });
+    }
+
+    function fetchBorrowedBooks(){
+        $.ajax({
+            url: "api/fetch_borrowed.php",
+            type: "GET",
+            success: function(response){
+                $("#borrowedBooksTable tbody").html(response);
+            }
+        });
+    }
 });
 
 

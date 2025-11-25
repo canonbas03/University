@@ -1,9 +1,93 @@
+/* ===== GLOBAL PAGE LAYOUT ===== */
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    margin: 20px;
+}
+
+.forms-container {
+        display: flex;
+        gap: 20px; 
+        align-items: flex-start;
+        margin-bottom: 20px;
+    }
+
+form {
+    background: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 350px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Labels and inputs */
+label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+input {
+    padding: 8px;
+    width: 90%;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+}
+
+/* Buttons */
+button {
+    margin-top: 10px;
+    padding: 10px;
+    background: #3c763d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2f5c31;
+}
+
+/* ===== MESSAGE BOX ===== */
 #message {
     display: none;
     padding: 10px;
-    margin-top: 10px;
+    margin-bottom: 20px;
     background-color: #dff0d8;
     color: #3c763d;
     border: 1px solid #3c763d;
     border-radius: 5px;
+    width: 300px;
 }
+
+/* ===== TABLES ===== */
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+th {
+    background: #dff0d8;
+    color: #3c763d;
+}
+
+tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
